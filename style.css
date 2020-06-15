@@ -1,0 +1,11 @@
+body {
+  background-image: linear-gradient(
+    to right,
+    rgba(219, 219, 219, 0.726),
+    rgb(126, 148, 173)
+  );
+}
+
+.haupt {
+  padding-top: 40px;
+}
