@@ -7,7 +7,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -17,38 +16,125 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <title>Hello, world!</title>
+    <title>Habit Tracker V1</title>
   </head>
   <body>
-    <div class="haupt container">
-      <h1 class="display-4">WetterApp V.1</h1>
+    <div id="hauptform" class="haupt container">
+      <div class="kopfleiste">
+        <button id="zurueck" type="button" class="btn btn-secondary knopf">
+          <
+        </button>
 
-      <form id="suchform">
-        <div class="pt-5 form-group">
-          <input
-            type="text"
-            class="shadow-sm form-control"
-            id="stadtinput"
-            placeholder="Stadt oder Ort"
-          />
+        <h1 id="datumHaupt" class="datumcss align-middle">
+          Habits
+        </h1>
+        <button id="vorwaerts" type="button" class="btn btn-secondary knopf">
+          >
+        </button>
+      </div>
+
+      <button
+        type="button"
+        id="tabellezeigen"
+        class="mb-4 btn btn-info btn-md btn-block"
+      >
+        <b>Tabelle zeigen</b>
+      </button>
+      <form id="heuteform">
+        <div class="row">
+          <div class="col-sm">
+            <label>Wakeup</label>
+            <input id="wakeup" type="time" placeholder="Wake Up Time" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <label>Arbeitszeit</label>
+
+            <input id="arbeitszeit" type="number" placeholder="Arbeitszeit" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <label>Lernzeit</label>
+            <input id="lernzeit" type="number" placeholder="Lernzeit" />
+          </div>
+        </div>
+        <label>Lesezeit</label>
+        <input
+          id="lesezeit"
+          type="number"
+          name="lesezeit1"
+          placeholder="Lesezeit"
+        />
+        <div class="row">
+          <div class="col-sm">
+            <label for="Training">Was trainiert?</label>
+
+            <select name="training" id="trainingheute">
+              <option value="">Pausiert</option>
+              <option value="rücken">Rücken</option>
+              <option value="schultern">Schultern</option>
+              <option value="beine">Beine</option>
+              <option value="brust">Brust</option>
+              <option value="arme">Arme</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <label>Schlafzeit</label>
+            <input id="schlafzeit" type="number" placeholder="Schlafzeit" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <textarea
+              id="kommentar"
+              class="shadow-sm form-control"
+              placeholder="Kommentar"
+            ></textarea>
+          </div>
         </div>
         <button type="submit" id="suchen" class="shadow-sm btn btn-primary">
-          Suchen
+          Speichern
         </button>
       </form>
+    </div>
+    <!-- Bis hier geht die EingabeForm. Die wird ab hier versteckt. -->
 
-      <div class="shadow-sm mt-5 card">
-        <div class="card-body">
-          <h2 id="ort" class="display-3" style="font-size: 48px;">Ort</h2>
-          <h3 id="wetter" class="display-4" style="font-size: 28px;">
-            Wetter Ergebnis
-          </h3>
-          <div id="jsonErgebnis">hier kommt json hin</div>
-        </div>
+    <!-- Ab Hier:  Tabelle -->
+    <div id="tabellecontainer" class="haupt container">
+      <button
+        type="button"
+        id="formanzeigen"
+        class="mb-4 btn btn-info btn-md btn-block"
+      >
+        <b>Zurück zur Eingabe</b>
+      </button>
+      <div id="anfangsTabelle" class="table-responsive">
+        <table
+          class="table-striped table-bordered table-dark table"
+          id="tabellecss"
+        >
+          <thead>
+            <tr>
+              <th scope="col">Datum</th>
+              <th scope="col">Wakeup</th>
+              <th scope="col">Arbeitszeit</th>
+              <th scope="col">Lernzeit</th>
+              <th scope="col">Lesezeit</th>
+              <th scope="col">Schlafzeit</th>
+              <th scope="col">Trainingheute</th>
+              <th scope="col">Kommentar</th>
+            </tr>
+          </thead>
+          <tbody id="tabellenbody"></tbody>
+        </table>
       </div>
     </div>
+    <!-- Ende: Tabelle -->
 
-    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -65,6 +151,26 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"
     ></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCDp-KWCZzqv8O1XINyhxIMZg4ysnsoDCQ",
+        authDomain: "habit-tracker-v1.firebaseapp.com",
+        databaseURL: "https://habit-tracker-v1.firebaseio.com",
+        projectId: "habit-tracker-v1",
+        storageBucket: "habit-tracker-v1.appspot.com",
+        messagingSenderId: "247876133914",
+        appId: "1:247876133914:web:b09b233cc2e79185e49da3",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+    </script>
     <script src="script.js"></script>
+    <script src="datenbank.js"></script>
+    <script src="tabelle.js"></script>
   </body>
 </html>
