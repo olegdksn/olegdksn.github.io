@@ -1,42 +1,75 @@
-// $("#suchen").on("click", (event) => {
-//   event.preventDefault();
-//   console.log("funktioniert");
-// });
+// arbeitszeit
+// lernzeit
+// wakeup
+// lesezeit
+// trainingheute
+// schlafzeit
+// kommentar
+$("#tabellecontainer").hide();
+$("#vorwaerts").hide();
+// Heutiges Datum
 
-// let stadtinput  = Suchfeld Eingabe
-// let suchen = Button Submit
-// let ort  =  Heading Ort
+let aktuellerTag;
+let Dateobject = new Date();
 
-const key = "1763822c1f9595fbdaa793c7f0b863bb";
-let stadt;
+const heuteEinfuegen = function () {
+  aktuellerTag =
+    Dateobject.getDate() +
+    "-" +
+    (Dateobject.getMonth() + 1) +
+    "-" +
+    Dateobject.getFullYear();
 
-$("#suchform").submit((event) => {
+  $("#datumHaupt").html(aktuellerTag);
+};
+
+heuteEinfuegen();
+
+// VOR UND ZURUECK (DATUM)
+
+let counter = 0;
+let neuesDatum = aktuellerTag;
+let tag;
+let monat = Dateobject.getMonth() + 1;
+let jahr;
+
+const datumBerechnen = function () {
+  if (Dateobject.getDate() + counter < 1) {
+    if ([0, 2, 4, 6, 7, 9, 11].includes(monat - 1)) {
+      tag = 31;
+      counter = 31 - Dateobject.getDate();
+      monat = monat - 1;
+      neuesDatum = tag + "-" + monat + "-" + Dateobject.getFullYear();
+    } else {
+      tag = 30;
+      monat = monat - 1;
+      counter = 30 - Dateobject.getDate();
+      neuesDatum = tag + "-" + monat + "-" + Dateobject.getFullYear();
+    }
+  } else {
+    neuesDatum =
+      Dateobject.getDate() +
+      counter +
+      "-" +
+      monat +
+      "-" +
+      Dateobject.getFullYear();
+  }
+};
+
+$("#zurueck").click((event) => {
   event.preventDefault();
-  console.log("submitted");
-  stadt = $("#stadtinput").val();
-  console.log(stadt);
-  wetterAbruf();
+  $("#vorwaerts").show();
+  counter = counter - 1;
+  datumBerechnen();
+  $("#datumHaupt").html(neuesDatum);
+  $("#heuteform").trigger("reset");
 });
 
-const wetterAbruf = function () {
-  fetch(
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
-      stadt +
-      "&appid=" +
-      key
-  )
-    .then((response) => {
-      console.log(response);
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      var celcius = Math.round(parseFloat(data.main.temp) - 273.15);
-      $("#jsonErgebnis").html(
-        "Temperatur in F: " +
-          celcius +
-          "<p> Humidiy: " +
-          data["main"]["humidity"]
-      );
-    });
-};
+$("#vorwaerts").click((event) => {
+  event.preventDefault();
+  counter = counter + 1;
+  datumBerechnen();
+  $("#datumHaupt").html(neuesDatum);
+  $("#heuteform").trigger("reset");
+});
