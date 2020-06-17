@@ -120,18 +120,173 @@
           <thead>
             <tr>
               <th scope="col">Datum</th>
-              <th scope="col">Wakeup</th>
-              <th scope="col">Arbeitszeit</th>
-              <th scope="col">Lernzeit</th>
-              <th scope="col">Lesezeit</th>
-              <th scope="col">Schlafzeit</th>
-              <th scope="col">Trainingheute</th>
-              <th scope="col">Kommentar</th>
+              <th scope="col">
+                <button
+                  type="button"
+                  id="wakeupbutton"
+                  class="dropdown-toggle btn custombutton"
+                  style="
+                    padding: 1px;
+                    padding-left: 6px;
+                    padding-right: 6px;
+                    font-size: 12px;
+                  "
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Wakeup
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" id="summeWakeup" href="#"
+                    >Summiere test</a
+                  >
+                  <a class="dropdown-item" id="averageWakeup" href="#"
+                    >Average</a
+                  >
+                  <a class="dropdown-item" id="emptyWakeup" href="#">Empty</a>
+                </div>
+              </th>
+              <th scope="col">
+                <button
+                  type="button"
+                  id="arbeitszeitbutton"
+                  class="dropdown-toggle btn custombutton"
+                  style="
+                    padding: 1px;
+                    padding-left: 6px;
+                    padding-right: 6px;
+                    font-size: 12px;
+                  "
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Arbeitszeit
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" id="summeArbeitszeit" href="#"
+                    >Summe</a
+                  >
+                  <a class="dropdown-item" id="averageArbeitszeit" href="#"
+                    >Average</a
+                  >
+                  <a class="dropdown-item" id="emptyArbeitszeit" href="#"
+                    >Empty</a
+                  >
+                </div>
+              </th>
+              <th scope="col">
+                <button
+                  type="button"
+                  id="lernzeitbutton"
+                  class="dropdown-toggle btn custombutton"
+                  style="
+                    padding: 1px;
+                    padding-left: 6px;
+                    padding-right: 6px;
+                    font-size: 12px;
+                  "
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Lernzeit
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" id="summeLernzeit" href="#">Summe</a>
+                  <a class="dropdown-item" id="averageLernzeit" href="#"
+                    >Average</a
+                  >
+                  <a class="dropdown-item" id="emptyLernzeit" href="#">Empty</a>
+                </div>
+              </th>
+              <th scope="col">
+                <button
+                  type="button"
+                  id="lesezeitbutton"
+                  class="dropdown-toggle btn custombutton"
+                  style="
+                    padding: 1px;
+                    padding-left: 6px;
+                    padding-right: 6px;
+                    font-size: 12px;
+                  "
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Lesezeit
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" id="summeLesezeit" href="#">Summe</a>
+                  <a class="dropdown-item" id="averageLesezeit" href="#"
+                    >Average</a
+                  >
+                  <a class="dropdown-item" id="emptyLesezeit" href="#">Empty</a>
+                </div>
+              </th>
+              <th scope="col">
+                <button
+                  type="button"
+                  id="schlafzeitbutton"
+                  class="dropdown-toggle btn custombutton"
+                  style="
+                    padding: 1px;
+                    padding-left: 6px;
+                    padding-right: 6px;
+                    font-size: 12px;
+                  "
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Schlafzeit
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" id="summeSchlafzeit" href="#"
+                    >Summe</a
+                  >
+                  <a class="dropdown-item" id="averageSchlafzeit" href="#"
+                    >Average</a
+                  >
+                  <a class="dropdown-item" id="emptySchlafzeit" href="#"
+                    >Empty</a
+                  >
+                </div>
+              </th>
+              <th scope="col">
+                <button
+                  type="button"
+                  id="trainingbutton"
+                  class="dropdown-toggle btn custombutton"
+                  style="
+                    padding: 1px;
+                    padding-left: 6px;
+                    padding-right: 6px;
+                    font-size: 12px;
+                  "
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Training
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" id="emptyTraining" href="#">Empty</a>
+                </div>
+              </th>
+              <th scope="col">
+                <button type="button" class="custombuttonNoHover">
+                  Kommentar
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody id="tabellenbody"></tbody>
         </table>
       </div>
+      <h4 id="statistikErgebnis"></h4>
     </div>
     <!-- Ende: Tabelle -->
 
@@ -172,5 +327,6 @@
     <script src="script.js"></script>
     <script src="datenbank.js"></script>
     <script src="tabelle.js"></script>
+    <script src="buttons.js"></script>
   </body>
 </html>
