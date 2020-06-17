@@ -5,6 +5,7 @@
 // trainingheute
 // schlafzeit
 // kommentar
+
 $("#tabellecontainer").hide();
 $("#vorwaerts").hide();
 // Heutiges Datum
