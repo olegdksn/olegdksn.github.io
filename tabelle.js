@@ -15,13 +15,13 @@ db.collection("user1")
       $("#tabellenbody").append(
         `<tr>
       <th scope="row">${doc.id}</th>
-      <td>${doc.data().Wakeup}</td>
-      <td>${doc.data().Arbeitszeit}</td>
-      <td>${doc.data().Lernzeit}</td>
-      <td>${doc.data().Lesezeit}</td>
-      <td>${doc.data().Schlafzeit}</td>
-      <td>${doc.data().Trainingheute}</td>
-      <td>${doc.data().Kommentar}</td>
+      <td class="summiereWakeup" >${doc.data().Wakeup}</td>
+      <td class="summiereArbeitszeit" >${doc.data().Arbeitszeit}</td>
+      <td class="summiereLernzeit">${doc.data().Lernzeit}</td>
+      <td class="summiereLesezeit">${doc.data().Lesezeit}</td>
+      <td class="summiereSchlafzeit">${doc.data().Schlafzeit}</td>
+      <td class="summiereTraining">${doc.data().Trainingheute}</td>
+      <td >${doc.data().Kommentar}</td>
     </tr>`
       );
       // Bis hier Zeile einfuegen.
